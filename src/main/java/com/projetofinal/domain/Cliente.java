@@ -21,7 +21,6 @@ public class Cliente implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
-	@NotNull
 	private Integer id;
 
 	@Column(length = 100)
