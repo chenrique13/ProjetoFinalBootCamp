@@ -29,10 +29,6 @@ public class Faq {
 	@NotNull
 	private String texto;
 
-	@Column
-	@NotNull
-	private Produto produto;
-
 	public Faq() {
 		super();
 	}
@@ -72,14 +68,6 @@ public class Faq {
 
 	public void setTexto(String texto) {
 		this.texto = texto;
-	}
-
-	public Produto getProduto() {
-		return produto;
-	}
-
-	public void setProduto(Produto produto) {
-		this.produto = produto;
 	}
 
 }

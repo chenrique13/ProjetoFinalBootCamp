@@ -2,6 +2,9 @@ package com.projetofinal.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.sun.istack.NotNull;
@@ -10,13 +13,11 @@ import com.sun.istack.NotNull;
 @Table(name = "itens_venda")
 public class ItensVenda {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	@NotNull
-	private Venda venda;
-
-	@Column
-	@NotNull
-	private Produto produto;
+	private Integer id;
 
 	@Column
 	@NotNull
@@ -30,8 +31,9 @@ public class ItensVenda {
 		super();
 	}
 
-	public ItensVenda(Integer quantidade, Double valorUnitario) {
+	public ItensVenda(Integer id, Integer quantidade, Double valorUnitario) {
 		super();
+		this.id = id;
 		this.quantidade = quantidade;
 		this.valorUnitario = valorUnitario;
 	}
@@ -41,22 +43,14 @@ public class ItensVenda {
 	 * 
 	 * @author Cícero Junior
 	 */
-
-	public Venda getVenda() {
-		return venda;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setVenda(Venda venda) {
-		this.venda = venda;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public Produto getProduto() {
-		return produto;
-	}
-
-	public void setProduto(Produto produto) {
-		this.produto = produto;
-	}
 
 	public Integer getQuantidade() {
 		return quantidade;

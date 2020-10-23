@@ -25,17 +25,9 @@ public class Venda {
 	@NotNull
 	private Date dataHora;
 
-	@NotNull
-	private Cliente cliente;
-
-	@NotNull
-	private FormaPagamento formapagamento;
-
 	@Column(name = "valor_total")
 	private Double valorTotal;
 
-	
-	
 	public Venda() {
 		super();
 	}
@@ -44,7 +36,6 @@ public class Venda {
 		super();
 		this.id = id;
 		this.dataHora = dataHora;
-		this.formapagamento = formapagamento;
 		this.valorTotal = valorTotal;
 	}
 
@@ -68,22 +59,6 @@ public class Venda {
 
 	public void setDataHora(Date dataHora) {
 		this.dataHora = dataHora;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
-	public FormaPagamento getFormapagamento() {
-		return formapagamento;
-	}
-
-	public void setFormapagamento(FormaPagamento formapagamento) {
-		this.formapagamento = formapagamento;
 	}
 
 	public Double getValorTotal() {

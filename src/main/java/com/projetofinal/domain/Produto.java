@@ -32,15 +32,6 @@ public class Produto {
 	@Column(length = 20)
 	private Integer unidade;
 
-	@Column
-	private Categoria categoria;
-
-	@Column
-	private Fornecedor fornecedor;
-
-	@Column
-	private Marca marca;
-
 	public Produto() {
 		super();
 	}
@@ -98,30 +89,6 @@ public class Produto {
 
 	public void setUnidade(Integer unidade) {
 		this.unidade = unidade;
-	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-
-	public Fornecedor getFornecedor() {
-		return fornecedor;
-	}
-
-	public void setFornecedor(Fornecedor fornecedor) {
-		this.fornecedor = fornecedor;
-	}
-
-	public Marca getMarca() {
-		return marca;
-	}
-
-	public void setMarca(Marca marca) {
-		this.marca = marca;
 	}
 
 }
