@@ -11,7 +11,7 @@ import com.projetofinal.domain.Marca;
 import com.projetofinal.services.MarcaService;
 
 @RestController
-@RequestMapping(value = "/marca")
+@RequestMapping(value = "/marcas")
 public class MarcaResource {
 
 	@Autowired

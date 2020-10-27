@@ -1,6 +1,8 @@
 package com.projetofinal.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,9 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -22,6 +26,7 @@ public class Produto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
+	@NotNull
 	private Integer id;
 
 	@Column(length = 200)
@@ -37,17 +42,35 @@ public class Produto implements Serializable {
 	@Column(length = 20)
 	private Integer unidade;
 
-	//Para evitar referencia ciclicas
-	@JsonBackReference
+	// Para evitar referencia ciclicas
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
+
+	// Para evitar referencia ciclicas
+	@JsonManagedReference
+	@ManyToOne
+	@JoinColumn(name = "marca_id")
+	private Marca marca;
+
+	// Para evitar referencia ciclicas
+	@JsonManagedReference
+	@ManyToOne
+	@JoinColumn(name = "fornecedor_id")
+	private Fornecedor fornecedor;
+	
+	//Para evitar referencias ciclicas
+		@JsonBackReference
+		@OneToMany(mappedBy = "produto")
+		private List<Faq> faq = new ArrayList<>();
 
 	public Produto() {
 
 	}
 
-	public Produto(Integer id, String nome, String descricao, Double preco, Integer unidade, Categoria categoria) {
+	public Produto(Integer id, String nome, String descricao, Double preco, Integer unidade, Categoria categoria,
+			Marca marca, Fornecedor fornecedor) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -55,6 +78,8 @@ public class Produto implements Serializable {
 		this.preco = preco;
 		this.unidade = unidade;
 		this.categoria = categoria;
+		this.marca = marca;
+		this.fornecedor = fornecedor;
 	}
 
 	/**
