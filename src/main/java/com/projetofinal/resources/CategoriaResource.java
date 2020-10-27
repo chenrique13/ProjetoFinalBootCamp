@@ -11,7 +11,7 @@ import com.projetofinal.domain.Categoria;
 import com.projetofinal.services.CategoriaService;
 
 @RestController
-@RequestMapping(value = "/categoria")
+@RequestMapping(value = "/categorias")
 public class CategoriaResource {
 
 	@Autowired
@@ -25,8 +25,4 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(objeto);
 	}
 
-//	@RequestMapping (method = RequestMethod.GET)
-//	public String lista() {
-//		return "funcionando";
-//	}
 }

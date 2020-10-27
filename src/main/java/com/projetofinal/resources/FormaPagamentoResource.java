@@ -7,20 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.projetofinal.domain.Cliente;
-import com.projetofinal.services.ClienteService;
+import com.projetofinal.domain.FormaPagamento;
+import com.projetofinal.services.FormaPagamentoService;
 
 @RestController
-@RequestMapping(value = "/clientes")
-public class ClienteResource {
+@RequestMapping(value = "/formapagamento")
+public class FormaPagamentoResource {
 
 	@Autowired
-	private ClienteService servico;
+	private FormaPagamentoService servico;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 
-		Cliente objeto = servico.buscar(id);
+		FormaPagamento objeto = servico.buscar(id);
 
 		return ResponseEntity.ok().body(objeto);
 	}

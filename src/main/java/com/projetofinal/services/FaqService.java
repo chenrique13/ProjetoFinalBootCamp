@@ -5,21 +5,21 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.projetofinal.domain.Cliente;
-import com.projetofinal.repositorios.ClienteRepository;
+import com.projetofinal.domain.Faq;
+import com.projetofinal.repositorios.FaqRepository;
 import com.projetofinal.services.exceptions.ObjectNotFoundException;
 
 @Service
-public class ClienteService {
+public class FaqService {
 
 	@Autowired
-	private ClienteRepository repositorio;
+	private FaqRepository repositorio;
 
-	public Cliente buscar(Integer id) {
-		Optional<Cliente> objeto = repositorio.findById(id);
+	public Faq buscar(Integer id) {
+		Optional<Faq> objeto = repositorio.findById(id);
 
 		return objeto.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! ID: " + id + "Tipo" + Cliente.class.getName()));
+				"Objeto não encontrado! ID: " + id + "Tipo" + Faq.class.getName()));
 	}
 
 }

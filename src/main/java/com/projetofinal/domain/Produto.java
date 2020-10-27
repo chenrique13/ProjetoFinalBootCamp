@@ -2,16 +2,16 @@ package com.projetofinal.domain;
 
 import java.io.Serializable;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -20,9 +20,8 @@ public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	@NotNull
 	private Integer id;
 
 	@Column(length = 200)
@@ -38,24 +37,24 @@ public class Produto implements Serializable {
 	@Column(length = 20)
 	private Integer unidade;
 
+	//Para evitar referencia ciclicas
+	@JsonBackReference
 	@ManyToOne
-	@JoinTable (name = "categoria_produto", 
-	joinColumns = @JoinColumn (name = "categoria_id"),
-	inverseJoinColumns = @JoinColumn (name = "produto_id"))
+	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
-	
 
 	public Produto() {
 
 	}
 
-	public Produto(Integer id, String nome, String descricao, Double preco, Integer unidade) {
+	public Produto(Integer id, String nome, String descricao, Double preco, Integer unidade, Categoria categoria) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.preco = preco;
 		this.unidade = unidade;
+		this.categoria = categoria;
 	}
 
 	/**

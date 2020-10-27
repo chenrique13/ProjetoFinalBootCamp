@@ -14,7 +14,7 @@ import com.sun.istack.NotNull;
 public class ItensVenda {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	@NotNull
 	private Integer id;

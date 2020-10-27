@@ -16,7 +16,7 @@ import com.sun.istack.NotNull;
 public class Faq {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	@NotNull
 	private Integer id;
