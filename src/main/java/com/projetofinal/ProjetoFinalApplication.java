@@ -1,5 +1,6 @@
 package com.projetofinal;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,18 +17,33 @@ import com.projetofinal.domain.Produto;
 import com.projetofinal.repositorios.CategoriaRepository;
 import com.projetofinal.repositorios.ClienteRepository;
 import com.projetofinal.repositorios.FaqRepository;
+import com.projetofinal.repositorios.FormaPagamentoRepository;
 import com.projetofinal.repositorios.FornecedorRepository;
+import com.projetofinal.repositorios.ItensVendaRepository;
 import com.projetofinal.repositorios.MarcaRepository;
 import com.projetofinal.repositorios.ProdutoRepository;
+import com.projetofinal.repositorios.VendaRepository;
 
 @SpringBootApplication
 public class ProjetoFinalApplication implements CommandLineRunner {
 
 	@Autowired
+	private CategoriaRepository repositorioCategoria;
+
+	@Autowired
 	private ClienteRepository repositorioCliente;
 
 	@Autowired
-	private CategoriaRepository repositorioCategoria;
+	private FaqRepository repositorioFaq;
+
+	@Autowired
+	private FormaPagamentoRepository repositorioFormaPagamento;
+
+	@Autowired
+	private FornecedorRepository repositorioFornecedor;
+
+	@Autowired
+	private ItensVendaRepository repositorioItensvenda;
 
 	@Autowired
 	private MarcaRepository repositorioMarca;
@@ -36,10 +52,7 @@ public class ProjetoFinalApplication implements CommandLineRunner {
 	private ProdutoRepository repositorioProduto;
 
 	@Autowired
-	private FornecedorRepository repositorioFornecedor;
-
-	@Autowired
-	private FaqRepository repositorioFaq;
+	private VendaRepository repositorioVenda;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetoFinalApplication.class, args);
@@ -48,10 +61,12 @@ public class ProjetoFinalApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Cliente cliente1 = new Cliente(null, "Carlos", "10197932444", "c.henrique13@gmail.com", null, null, null, null,
-				"985740926");
-		Cliente cliente2 = new Cliente(null, "Cicero", "12345678910", "cirerooliveira@gmail.com", null, null, null,
-				null, "912345678");
+		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+		Cliente cliente1 = new Cliente(null, "Carlos", "10197932444", "c.henrique13@gmail.com",
+				data.parse("13/09/1994 10:15"), "Masculino", null, "Carlinhos", "985740926");
+		Cliente cliente2 = new Cliente(null, "Cicero", "12345678910", "cirerooliveira@gmail.com",
+				data.parse("05/07/1989 07:00"), "Masculino", null, "Ciço", "912345678");
 
 		repositorioCliente.saveAll(Arrays.asList(cliente1, cliente2));
 
@@ -75,8 +90,8 @@ public class ProjetoFinalApplication implements CommandLineRunner {
 		repositorioFornecedor.saveAll(Arrays.asList(fornecedor1, fornecedor2));
 		repositorioProduto.saveAll(Arrays.asList(p1, p2));
 
-		Faq faq1 = new Faq(null, null, "Muito bom!",p2);
-		Faq faq2 = new Faq(null, null, "Produto de Excelente qualidade",p1);
+		Faq faq1 = new Faq(null, data.parse("27/10/2020 19:51"), "Muito bom!", p2);
+		Faq faq2 = new Faq(null, data.parse("10/12/2019 16:30"), "Produto de Excelente qualidade", p1);
 
 		repositorioFaq.saveAll(Arrays.asList(faq1, faq2));
 

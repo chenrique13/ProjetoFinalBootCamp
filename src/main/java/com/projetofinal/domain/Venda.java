@@ -2,14 +2,21 @@ package com.projetofinal.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -30,15 +37,36 @@ public class Venda implements Serializable {
 	@Column(name = "valor_total")
 	private Double valorTotal;
 
+	// Para evitar referencia ciclicas
+	@JsonManagedReference
+	@ManyToOne
+	@JoinColumn(name = "cliente_id")
+	private Cliente cliente;
+
+	// Para evitar referencia ciclicas
+	@JsonManagedReference
+	@ManyToOne
+	@JoinColumn(name = "formapagamento_id")
+	private FormaPagamento formaPagamento;
+
+	// Para evitar referencias ciclicas
+	@JsonBackReference
+	@OneToMany(mappedBy = "venda")
+	private List<ItensVenda> itensVenda = new ArrayList<>();
+
 	public Venda() {
 		super();
 	}
 
-	public Venda(Integer id, Date dataHora, FormaPagamento formapagamento, Double valorTotal) {
+	public Venda(Integer id, Date dataHora, FormaPagamento formapagamento, Double valorTotal, Cliente cliente,
+			FormaPagamento formaPagamento) {
 		super();
 		this.id = id;
 		this.dataHora = dataHora;
 		this.valorTotal = valorTotal;
+		this.cliente = cliente;
+		this.formaPagamento = formapagamento;
+
 	}
 
 	/**

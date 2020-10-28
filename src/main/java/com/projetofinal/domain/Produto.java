@@ -59,11 +59,16 @@ public class Produto implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "fornecedor_id")
 	private Fornecedor fornecedor;
-	
-	//Para evitar referencias ciclicas
-		@JsonBackReference
-		@OneToMany(mappedBy = "produto")
-		private List<Faq> faq = new ArrayList<>();
+
+	// Para evitar referencias ciclicas
+	@JsonBackReference
+	@OneToMany(mappedBy = "produto")
+	private List<Faq> faq = new ArrayList<>();
+
+	// Para evitar referencias ciclicas
+	@JsonBackReference
+	@OneToMany(mappedBy = "produto")
+	private List<ItensVenda> itensVenda = new ArrayList<>();
 
 	public Produto() {
 
