@@ -1,8 +1,8 @@
 package com.projetofinal.domain;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -58,14 +58,14 @@ public class Venda implements Serializable {
 		super();
 	}
 
-	public Venda(Integer id, Date dataHora, FormaPagamento formapagamento, Double valorTotal, Cliente cliente,
+	public Venda(Integer id, Date dataHora, Double valorTotal, Cliente cliente,
 			FormaPagamento formaPagamento) {
 		super();
 		this.id = id;
 		this.dataHora = dataHora;
 		this.valorTotal = valorTotal;
 		this.cliente = cliente;
-		this.formaPagamento = formapagamento;
+		this.formaPagamento = formaPagamento;
 
 	}
 

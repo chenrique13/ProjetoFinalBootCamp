@@ -19,6 +19,12 @@ import com.sun.istack.NotNull;
 public class ItensVenda implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
+	@NotNull
+	private Integer id;
+	
 	@Column
 	@NotNull
 	private Integer quantidade;
@@ -43,8 +49,9 @@ public class ItensVenda implements Serializable {
 		super();
 	}
 
-	public ItensVenda(Integer quantidade, Double valorUnitario, Produto produto, Venda venda) {
+	public ItensVenda(Integer id, Integer quantidade, Double valorUnitario, Produto produto, Venda venda) {
 		super();
+		this.id = id;
 		this.quantidade = quantidade;
 		this.valorUnitario = valorUnitario;
 		this.produto = produto;

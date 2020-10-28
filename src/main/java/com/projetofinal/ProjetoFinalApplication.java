@@ -11,9 +11,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.projetofinal.domain.Categoria;
 import com.projetofinal.domain.Cliente;
 import com.projetofinal.domain.Faq;
+import com.projetofinal.domain.FormaPagamento;
 import com.projetofinal.domain.Fornecedor;
 import com.projetofinal.domain.Marca;
 import com.projetofinal.domain.Produto;
+import com.projetofinal.domain.Venda;
 import com.projetofinal.repositorios.CategoriaRepository;
 import com.projetofinal.repositorios.ClienteRepository;
 import com.projetofinal.repositorios.FaqRepository;
@@ -69,6 +71,12 @@ public class ProjetoFinalApplication implements CommandLineRunner {
 				data.parse("05/07/1989 07:00"), "Masculino", null, "Ciço", "912345678");
 
 		repositorioCliente.saveAll(Arrays.asList(cliente1, cliente2));
+		
+		FormaPagamento formaPg1 = new FormaPagamento(null, "Cartão", "Pagamento em 2 vezes", true);
+		FormaPagamento formaPg2 = new FormaPagamento(null, "Boleto", "Pagamento em 1 vez", true);
+		
+		repositorioFormaPagamento.saveAll(Arrays.asList(formaPg1,formaPg2));
+		
 
 		Categoria cat1 = new Categoria(null, "Livro", true);
 		Categoria cat2 = new Categoria(null, "Informática", true);
@@ -94,7 +102,11 @@ public class ProjetoFinalApplication implements CommandLineRunner {
 		Faq faq2 = new Faq(null, data.parse("10/12/2019 16:30"), "Produto de Excelente qualidade", p1);
 
 		repositorioFaq.saveAll(Arrays.asList(faq1, faq2));
+		
+		Venda venda1 = new Venda(null, data.parse("25/06/2019 19:25"), 500.00, cliente1, formaPg1);
+		Venda venda2 = new Venda(null,data.parse("25/06/2019 19:25"), 800.00, cliente2, formaPg2);
 
+		repositorioVenda.saveAll(Arrays.asList(venda1,venda2));
 	}
 
 }
