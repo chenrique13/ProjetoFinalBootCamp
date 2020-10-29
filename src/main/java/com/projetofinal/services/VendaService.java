@@ -1,5 +1,6 @@
 package com.projetofinal.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,10 @@ public class VendaService {
 
 	@Autowired
 	private VendaRepository repositorio;
+	
+	public List<Venda> buscarTodos() {
+		return repositorio.findAll();
+	}
 
 	public Venda buscar(Integer id) {
 		Optional<Venda> objeto = repositorio.findById(id);
