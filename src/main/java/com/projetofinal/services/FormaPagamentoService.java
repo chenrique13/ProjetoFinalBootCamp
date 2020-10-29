@@ -1,5 +1,6 @@
 package com.projetofinal.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,10 @@ public class FormaPagamentoService {
 	@Autowired
 	private FormaPagamentoRepository repositorio;
 
+	public List<FormaPagamento> buscarTodos() {
+		return repositorio.findAll();
+	}
+	
 	public FormaPagamento buscar(Integer id) {
 		Optional<FormaPagamento> objeto = repositorio.findById(id);
 

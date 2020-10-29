@@ -1,5 +1,6 @@
 package com.projetofinal.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,10 @@ public class FaqService {
 	@Autowired
 	private FaqRepository repositorio;
 
+	public List<Faq> buscarTodos() {
+		return repositorio.findAll();
+	}
+	
 	public Faq buscar(Integer id) {
 		Optional<Faq> objeto = repositorio.findById(id);
 

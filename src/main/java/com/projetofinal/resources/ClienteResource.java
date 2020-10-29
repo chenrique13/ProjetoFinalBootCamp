@@ -1,6 +1,7 @@
 package com.projetofinal.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,12 @@ public class ClienteResource {
 	@Autowired
 	private ClienteService servico;
 
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<Cliente>> findall() {
+		List<Cliente> lista = servico.buscarTodos();
+		return ResponseEntity.ok().body(lista);
+	}
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 

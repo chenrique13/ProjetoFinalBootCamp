@@ -1,5 +1,7 @@
 package com.projetofinal.resources;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,12 @@ public class FaqResource {
 	@Autowired
 	private FaqService servico;
 
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<Faq>> findall() {
+		List<Faq> lista = servico.buscarTodos();
+		return ResponseEntity.ok().body(lista);
+	}
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 

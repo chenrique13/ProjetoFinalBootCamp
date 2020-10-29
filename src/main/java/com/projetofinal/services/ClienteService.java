@@ -1,5 +1,6 @@
 package com.projetofinal.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,10 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository repositorio;
 
+	public List<Cliente> buscarTodos() {
+		return repositorio.findAll();
+	}
+	
 	public Cliente buscar(Integer id) {
 		Optional<Cliente> objeto = repositorio.findById(id);
 

@@ -1,5 +1,6 @@
 package com.projetofinal.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,10 @@ public class FornecedorService {
 	@Autowired
 	private FornecedorRepository repositorio;
 
+	public List<Fornecedor> buscarTodos() {
+		return repositorio.findAll();
+	}
+	
 	public Fornecedor buscar(Integer id) {
 		Optional<Fornecedor> objeto = repositorio.findById(id);
 
