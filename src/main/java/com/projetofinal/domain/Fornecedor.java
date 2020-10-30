@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,7 +45,7 @@ public class Fornecedor implements Serializable {
 
 	//Para evitar referencias ciclicas
 	@JsonBackReference
-	@OneToMany(mappedBy = "fornecedor")
+	@OneToMany(mappedBy = "fornecedor", cascade = CascadeType.ALL)
 	private List<Produto> produtos = new ArrayList<>();
 	
 	public Fornecedor() {

@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -35,7 +35,7 @@ public class Categoria implements Serializable {
 	private boolean ativo;
 
 	//Para evitar referencias ciclicas
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
 	private List<Produto> produtos = new ArrayList<>();
 
