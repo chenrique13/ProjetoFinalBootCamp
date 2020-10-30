@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -56,8 +57,8 @@ public class Cliente implements Serializable {
 	private String telefone;
 
 	// Para evitar referencias ciclicas
-	@JsonBackReference
-	@OneToMany(mappedBy = "cliente")
+	@JsonIgnore
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private List<Venda> vendas = new ArrayList<>();
 
 	public Cliente() {

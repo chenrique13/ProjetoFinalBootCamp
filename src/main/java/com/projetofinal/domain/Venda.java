@@ -38,7 +38,6 @@ public class Venda implements Serializable {
 	private Double valorTotal;
 
 	// Para evitar referencia ciclicas
-	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;

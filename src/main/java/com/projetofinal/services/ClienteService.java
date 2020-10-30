@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.projetofinal.domain.Cliente;
@@ -19,7 +20,7 @@ public class ClienteService {
 	public List<Cliente> buscarTodos() {
 		return repositorio.findAll();
 	}
-	
+
 	public Cliente buscar(Integer id) {
 		Optional<Cliente> objeto = repositorio.findById(id);
 
@@ -27,8 +28,17 @@ public class ClienteService {
 				"Objeto não encontrado! ID: " + id + "Tipo" + Cliente.class.getName()));
 	}
 
-	public Cliente insert (Cliente obj) {
+	public Cliente insert(Cliente obj) {
 		obj.setId(null);
 		return repositorio.save(obj);
+	}
+
+	public void delete(Integer id) {
+		try {
+			repositorio.deleteById(id);
+
+		} catch (EmptyResultDataAccessException e) {
+			throw new ObjectNotFoundException("Cliente não encontrada na base de dados para ser deletado.");
+		}
 	}
 }
