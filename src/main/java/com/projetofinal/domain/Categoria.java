@@ -14,7 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "categoria")
@@ -24,17 +23,14 @@ public class Categoria implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	@NotNull
 	private Integer id;
 
 	@Column(length = 200)
 	private String nome;
 
 	@Column
-	@NotNull
 	private boolean ativo;
 
-	//Para evitar referencias ciclicas
 	@JsonIgnore
 	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
 	private List<Produto> produtos = new ArrayList<>();

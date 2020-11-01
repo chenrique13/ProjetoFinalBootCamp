@@ -16,18 +16,51 @@ public class MarcaService {
 
 	@Autowired
 	private MarcaRepository repositorio;
-	
+
+	/**
+	 * Metodo para buscar todos no repositorio
+	 * 
+	 * @author Carlos Pereira
+	 * @return
+	 */
 	public List<Marca> buscarTodos() {
 		return repositorio.findAll();
 	}
 
+	/**
+	 * Metodo para buscar por id no repositorio e se nao tiver retornar mensagem de
+	 * erro
+	 * 
+	 * @author Carlos Pereira
+	 * @param id
+	 * @return
+	 */
 	public Marca buscar(Integer id) {
 		Optional<Marca> objeto = repositorio.findById(id);
 
-		return objeto.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! ID: " + id + "Tipo" + Marca.class.getName()));
+		return objeto.orElseThrow(
+				() -> new ObjectNotFoundException("Objeto não encontrado! ID: " + id + "Tipo" + Marca.class.getName()));
 	}
-	
+
+	/**
+	 * Metodo para inserir no repositorio se o id for nulo
+	 * 
+	 * @author Carlos Pereira
+	 * @param obj
+	 * @return
+	 */
+	public Marca inserir(Marca obj) {
+		obj.setId(null);
+		return repositorio.save(obj);
+	}
+
+	/**
+	 * Metodo para deletar do repositorio por id e se nao tiver retornar mensagem de
+	 * erro
+	 * 
+	 * @author Cícero Junior
+	 * @param id
+	 */
 	public void delete(Integer id) {
 		try {
 			repositorio.deleteById(id);

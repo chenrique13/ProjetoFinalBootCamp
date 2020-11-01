@@ -15,9 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.sun.istack.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "produto")
@@ -27,11 +25,9 @@ public class Produto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	@NotNull
 	private Integer id;
 
 	@Column(length = 200)
-	@NotNull
 	private String nome;
 
 	@Column
@@ -43,31 +39,23 @@ public class Produto implements Serializable {
 	@Column(length = 20)
 	private Integer unidade;
 
-	// Para evitar referencia ciclicas
-	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
 
-	// Para evitar referencia ciclicas
-	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "marca_id")
 	private Marca marca;
 
-	// Para evitar referencia ciclicas
-	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "fornecedor_id")
 	private Fornecedor fornecedor;
 
-	// Para evitar referencias ciclicas
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
 	private List<Faq> faq = new ArrayList<>();
 
-	// Para evitar referencias ciclicas
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
 	private List<ItensVenda> itensVenda = new ArrayList<>();
 
@@ -140,6 +128,38 @@ public class Produto implements Serializable {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public Marca getMarca() {
+		return marca;
+	}
+
+	public void setMarca(Marca marca) {
+		this.marca = marca;
+	}
+
+	public Fornecedor getFornecedor() {
+		return fornecedor;
+	}
+
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
+	}
+
+	public List<Faq> getFaq() {
+		return faq;
+	}
+
+	public void setFaq(List<Faq> faq) {
+		this.faq = faq;
+	}
+
+	public List<ItensVenda> getItensVenda() {
+		return itensVenda;
+	}
+
+	public void setItensVenda(List<ItensVenda> itensVenda) {
+		this.itensVenda = itensVenda;
 	}
 
 	@Override

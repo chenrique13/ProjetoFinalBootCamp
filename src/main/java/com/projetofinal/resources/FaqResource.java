@@ -23,12 +23,24 @@ public class FaqResource {
 	@Autowired
 	private FaqService servico;
 
+	/**
+	 * Metodo buscar todos
+	 * 
+	 * @author Carlos Pereira
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Faq>> findall() {
 		List<Faq> lista = servico.buscarTodos();
 		return ResponseEntity.ok().body(lista);
 	}
-	
+
+	/**
+	 * Metodo buscar por id
+	 * 
+	 * @author Carlos Pereira
+	 * @return
+	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 
@@ -36,15 +48,27 @@ public class FaqResource {
 
 		return ResponseEntity.ok().body(objeto);
 	}
-	
-//	@RequestMapping(method = RequestMethod.POST)
-//	public ResponseEntity <Faq> insert (@RequestBody Faq obj){
-//		obj = servico.insert(obj);
-//		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-//
-//		return ResponseEntity.created(uri).body(obj);
-//	}
 
+	/**
+	 * Metodo criar
+	 * 
+	 * @author Carlos Pereira
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Faq> inserir(@RequestBody Faq obj) {
+		obj = servico.inserir(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+
+		return ResponseEntity.created(uri).body(obj);
+	}
+
+	/**
+	 * Metodo deletar por id
+	 * 
+	 * @author Cícero Junior
+	 * @return
+	 */
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		servico.delete(id);

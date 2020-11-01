@@ -13,8 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.sun.istack.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "forma_pagamento")
@@ -24,23 +23,18 @@ public class FormaPagamento implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	@NotNull
 	private Integer id;
 
 	@Column(length = 200)
-	@NotNull
 	private String forma;
 
 	@Column
-	@NotNull
 	private String descricao;
 
 	@Column
-	@NotNull
 	private boolean ativo;
 
-	// Para evitar referencias ciclicas
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "formaPagamento", cascade = CascadeType.ALL)
 	private List<Venda> vendas = new ArrayList<>();
 
@@ -92,6 +86,14 @@ public class FormaPagamento implements Serializable {
 
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public List<Venda> getVendas() {
+		return vendas;
+	}
+
+	public void setVendas(List<Venda> vendas) {
+		this.vendas = vendas;
 	}
 
 	@Override

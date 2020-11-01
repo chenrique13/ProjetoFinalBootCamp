@@ -16,9 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.sun.istack.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "vendas")
@@ -28,29 +26,23 @@ public class Venda implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	@NotNull
 	private Integer id;
 
 	@Column
-	@NotNull
 	private Date dataHora;
 
 	@Column(name = "valor_total")
 	private Double valorTotal;
 
-	// Para evitar referencia ciclicas
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 
-	// Para evitar referencia ciclicas
-	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "formapagamento_id")
 	private FormaPagamento formaPagamento;
 
-	// Para evitar referencias ciclicas
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "venda", cascade = CascadeType.ALL)
 	private List<ItensVenda> itensVenda = new ArrayList<>();
 
@@ -58,8 +50,7 @@ public class Venda implements Serializable {
 		super();
 	}
 
-	public Venda(Integer id, Date dataHora, Double valorTotal, Cliente cliente,
-			FormaPagamento formaPagamento) {
+	public Venda(Integer id, Date dataHora, Double valorTotal, Cliente cliente, FormaPagamento formaPagamento) {
 		super();
 		this.id = id;
 		this.dataHora = dataHora;
@@ -97,6 +88,30 @@ public class Venda implements Serializable {
 
 	public void setValorTotal(Double valorTotal) {
 		this.valorTotal = valorTotal;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public FormaPagamento getFormaPagamento() {
+		return formaPagamento;
+	}
+
+	public void setFormaPagamento(FormaPagamento formaPagamento) {
+		this.formaPagamento = formaPagamento;
+	}
+
+	public List<ItensVenda> getItensVenda() {
+		return itensVenda;
+	}
+
+	public void setItensVenda(List<ItensVenda> itensVenda) {
+		this.itensVenda = itensVenda;
 	}
 
 	@Override

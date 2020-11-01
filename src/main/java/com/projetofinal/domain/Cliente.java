@@ -15,7 +15,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "clientes")
@@ -26,19 +25,15 @@ public class Cliente implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	@NotNull
 	private Integer id;
 
 	@Column(length = 100)
-	@NotNull
 	private String nome;
 
 	@Column(length = 11, unique = true)
-	@NotNull
 	private String cpf;
 
 	@Column(length = 200)
-	@NotNull
 	private String email;
 
 	@Column
@@ -56,7 +51,6 @@ public class Cliente implements Serializable {
 	@Column(length = 13)
 	private String telefone;
 
-	// Para evitar referencias ciclicas
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private List<Venda> vendas = new ArrayList<>();
@@ -79,12 +73,14 @@ public class Cliente implements Serializable {
 		this.telefone = telefone;
 	}
 
+	/**
+	 * Gets e Sets
+	 * 
+	 * @author Cícero Junior
+	 */
+
 	public Integer getId() {
 		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getNome() {
@@ -149,6 +145,18 @@ public class Cliente implements Serializable {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public List<Venda> getVendas() {
+		return vendas;
+	}
+
+	public void setVendas(List<Venda> vendas) {
+		this.vendas = vendas;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Override

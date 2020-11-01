@@ -17,17 +17,50 @@ public class FornecedorService {
 	@Autowired
 	private FornecedorRepository repositorio;
 
+	/**
+	 * Metodo para buscar todos no repositorio
+	 * 
+	 * @author Carlos Pereira
+	 * @return
+	 */
 	public List<Fornecedor> buscarTodos() {
 		return repositorio.findAll();
 	}
-	
+
+	/**
+	 * Metodo para buscar por id no repositorio e se nao tiver retornar mensagem de
+	 * erro
+	 * 
+	 * @author Carlos Pereira
+	 * @param id
+	 * @return
+	 */
 	public Fornecedor buscar(Integer id) {
 		Optional<Fornecedor> objeto = repositorio.findById(id);
 
 		return objeto.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! ID: " + id + "Tipo" + Fornecedor.class.getName()));
 	}
-	
+
+	/**
+	 * Metodo para inserir no repositorio se o id for nulo
+	 * 
+	 * @author Carlos Pereira
+	 * @param obj
+	 * @return
+	 */
+	public Fornecedor inserir(Fornecedor obj) {
+		obj.setId(null);
+		return repositorio.save(obj);
+	}
+
+	/**
+	 * Metodo para deletar do repositorio por id e se nao tiver retornar mensagem de
+	 * erro
+	 * 
+	 * @author Cícero Junior
+	 * @param id
+	 */
 	public void delete(Integer id) {
 		try {
 			repositorio.deleteById(id);

@@ -13,8 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.sun.istack.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "marcas")
@@ -24,18 +23,15 @@ public class Marca implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	@NotNull
 	private Integer id;
 
 	@Column(length = 200)
-	@NotNull
 	private String nome;
 
 	@Column
 	private String descricao;
 
-	// Para evitar referencias ciclicas
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "marca", cascade = CascadeType.ALL)
 	private List<Produto> produtos = new ArrayList<>();
 
@@ -78,6 +74,14 @@ public class Marca implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
 	}
 
 	@Override

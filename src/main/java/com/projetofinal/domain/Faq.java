@@ -12,9 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.sun.istack.NotNull;
-
 @Entity
 @Table
 public class Faq implements Serializable {
@@ -23,19 +20,14 @@ public class Faq implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	@NotNull
 	private Integer id;
 
 	@Column
-	//@NotNull
 	private Date dataHora;
 
 	@Column
-	@NotNull
 	private String texto;
-	
-	// Para evitar referencia ciclicas
-	@JsonManagedReference
+
 	@ManyToOne
 	@JoinColumn(name = "produto_id")
 	private Produto produto;
@@ -80,6 +72,14 @@ public class Faq implements Serializable {
 
 	public void setTexto(String texto) {
 		this.texto = texto;
+	}
+
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
 	}
 
 	@Override

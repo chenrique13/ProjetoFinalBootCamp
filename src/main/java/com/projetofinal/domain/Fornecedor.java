@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -24,7 +24,6 @@ public class Fornecedor implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	@NotNull
 	private Integer id;
 
 	@Column(length = 200)
@@ -43,11 +42,10 @@ public class Fornecedor implements Serializable {
 	@Column(length = 200)
 	private String email;
 
-	//Para evitar referencias ciclicas
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "fornecedor", cascade = CascadeType.ALL)
 	private List<Produto> produtos = new ArrayList<>();
-	
+
 	public Fornecedor() {
 		super();
 	}
@@ -114,6 +112,14 @@ public class Fornecedor implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
 	}
 
 	@Override

@@ -23,12 +23,24 @@ public class CategoriaResource {
 	@Autowired
 	private CategoriaService servico;
 
+	/**
+	 * Metodo buscar todos
+	 * 
+	 * @author Carlos Pereira
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Categoria>> findall() {
 		List<Categoria> lista = servico.buscarTodos();
 		return ResponseEntity.ok().body(lista);
 	}
 
+	/**
+	 * Metodo buscar por id
+	 * 
+	 * @author Carlos Pereira
+	 * @return
+	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 
@@ -36,15 +48,27 @@ public class CategoriaResource {
 
 		return ResponseEntity.ok().body(objeto);
 	}
-	
+
+	/**
+	 * Metodo criar
+	 * 
+	 * @author Carlos Pereira
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity <Categoria> insert (@RequestBody Categoria obj){
-		obj = servico.insert(obj);
+	public ResponseEntity<Categoria> inserir(@RequestBody Categoria obj) {
+		obj = servico.inserir(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 
 		return ResponseEntity.created(uri).body(obj);
 	}
 
+	/**
+	 * Metodo deletar por id
+	 * 
+	 * @author Cícero Junior
+	 * @return
+	 */
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		servico.delete(id);

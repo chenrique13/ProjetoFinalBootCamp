@@ -23,12 +23,24 @@ public class ClienteResource {
 	@Autowired
 	private ClienteService servico;
 
+	/**
+	 * Metodo buscar todos
+	 * 
+	 * @author Carlos Pereira
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Cliente>> findall() {
 		List<Cliente> lista = servico.buscarTodos();
 		return ResponseEntity.ok().body(lista);
 	}
 
+	/**
+	 * Metodo buscar por id
+	 * 
+	 * @author Carlos Pereira
+	 * @return
+	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 
@@ -37,14 +49,26 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(objeto);
 	}
 
+	/**
+	 * Metodo criar
+	 * 
+	 * @author Carlos Pereira
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity <Cliente> insert (@RequestBody Cliente obj){
-		obj = servico.insert(obj);
+	public ResponseEntity<Cliente> inserir(@RequestBody Cliente obj) {
+		obj = servico.inserir(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 
 		return ResponseEntity.created(uri).body(obj);
 	}
 
+	/**
+	 * Metodo deletar por id
+	 * 
+	 * @author Cícero Junior
+	 * @return
+	 */
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		servico.delete(id);
