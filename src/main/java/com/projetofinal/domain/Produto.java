@@ -20,7 +20,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "produto")
 public class Produto implements Serializable {
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = -3478556552907523879L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

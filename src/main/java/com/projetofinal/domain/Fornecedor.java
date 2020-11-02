@@ -19,7 +19,8 @@ import com.sun.istack.NotNull;
 @Entity
 @Table
 public class Fornecedor implements Serializable {
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = -7218184824133312006L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

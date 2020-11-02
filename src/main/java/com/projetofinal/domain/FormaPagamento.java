@@ -18,7 +18,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "forma_pagamento")
 public class FormaPagamento implements Serializable {
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = -3043546613486611054L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

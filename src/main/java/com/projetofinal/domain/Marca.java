@@ -18,7 +18,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "marcas")
 public class Marca implements Serializable {
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 3842651214260397395L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

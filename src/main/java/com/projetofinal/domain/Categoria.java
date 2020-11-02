@@ -18,7 +18,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "categoria")
 public class Categoria implements Serializable {
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = -354467743651772438L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
