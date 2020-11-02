@@ -34,22 +34,22 @@ public class Produto implements Serializable {
 	@Column
 	private String descricao;
 
-	@Column
+	@Column(name = "preco_unitario")
 	private Double preco;
 
 	@Column(length = 20)
 	private Integer unidade;
 
 	@ManyToOne
-	@JoinColumn(name = "categoria_id")
+	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
 
 	@ManyToOne
-	@JoinColumn(name = "marca_id")
+	@JoinColumn(name = "id_marca")
 	private Marca marca;
 
 	@ManyToOne
-	@JoinColumn(name = "fornecedor_id")
+	@JoinColumn(name = "id_fornecedor")
 	private Fornecedor fornecedor;
 
 	@JsonIgnore

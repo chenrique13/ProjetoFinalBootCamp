@@ -25,15 +25,15 @@ public class ItensVenda implements Serializable {
 	@Column
 	private Integer quantidade;
 
-	@Column
+	@Column(name = "valor_unitario")
 	private Double valorUnitario;
 
 	@ManyToOne
-	@JoinColumn(name = "produto_id")
+	@JoinColumn(name = "id_produto")
 	private Produto produto;
 
 	@ManyToOne
-	@JoinColumn(name = "venda_id")
+	@JoinColumn(name = "id_venda")
 	private Venda venda;
 
 	public ItensVenda() {

@@ -13,6 +13,7 @@ import com.projetofinal.domain.Cliente;
 import com.projetofinal.domain.Faq;
 import com.projetofinal.domain.FormaPagamento;
 import com.projetofinal.domain.Fornecedor;
+import com.projetofinal.domain.ItensVenda;
 import com.projetofinal.domain.Marca;
 import com.projetofinal.domain.Produto;
 import com.projetofinal.domain.Venda;
@@ -60,14 +61,19 @@ public class ProjetoFinalApplication implements CommandLineRunner {
 		SpringApplication.run(ProjetoFinalApplication.class, args);
 	}
 
+	/**
+	 * Metodo para Preecher o Banco de dados
+	 * 
+	 * @author Cícero Junior
+	 */
 	@Override
 	public void run(String... args) throws Exception {
 
 		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-		Cliente cliente1 = new Cliente(null, "Carlos", "10197932444", "c.henrique13@gmail.com",
+		Cliente cliente1 = new Cliente(null, "Carlos", "10193232444", "c.henrique13@gmail.com",
 				data.parse("13/09/1994 10:15"), "Masculino", null, "Carlinhos", "985740926");
-		Cliente cliente2 = new Cliente(null, "Cicero", "12345678910", "cirerooliveira@gmail.com",
+		Cliente cliente2 = new Cliente(null, "Cicero", "12325618910", "cirerooliveira@gmail.com",
 				data.parse("05/07/1989 07:00"), "Masculino", null, "Ciço", "912345678");
 
 		repositorioCliente.saveAll(Arrays.asList(cliente1, cliente2));
@@ -77,8 +83,8 @@ public class ProjetoFinalApplication implements CommandLineRunner {
 
 		repositorioFormaPagamento.saveAll(Arrays.asList(formaPg1, formaPg2));
 
-		Categoria cat1 = new Categoria(null, "Livro", true);
-		Categoria cat2 = new Categoria(null, "Informática", true);
+		Categoria categoria1 = new Categoria(null, "Livro", true);
+		Categoria categoria2 = new Categoria(null, "Informática", true);
 
 		Marca marca1 = new Marca(null, "Cia do Livro", "Editora");
 		Marca marca2 = new Marca(null, "Positivo", "Tecnologia");
@@ -87,25 +93,30 @@ public class ProjetoFinalApplication implements CommandLineRunner {
 				"vendas@tibrasil.com");
 
 		Fornecedor fornecedor2 = new Fornecedor(null, "Edit Mais", "Rua Fg, 812", "88 87465-65201",
-				"987.654.321/0001-09", "vendas@editmais.com");
+				"987.654.271/0001-09", "vendas@editmais.com");
 
-		Produto p1 = new Produto(null, "Computador", "HP-123", 1421.00, 1, cat2, marca2, fornecedor1);
-		Produto p2 = new Produto(null, "Livro Didático", "ABACO", 21.00, 2, cat1, marca1, fornecedor2);
+		Produto produto1 = new Produto(null, "Computador", "HP-123", 1421.00, 1, categoria2, marca2, fornecedor1);
+		Produto produto2 = new Produto(null, "Livro Didático", "ABACO", 21.00, 2, categoria1, marca1, fornecedor2);
 
-		repositorioCategoria.saveAll(Arrays.asList(cat1, cat2));
+		repositorioCategoria.saveAll(Arrays.asList(categoria1, categoria2));
 		repositorioMarca.saveAll(Arrays.asList(marca1, marca2));
 		repositorioFornecedor.saveAll(Arrays.asList(fornecedor1, fornecedor2));
-		repositorioProduto.saveAll(Arrays.asList(p1, p2));
+		repositorioProduto.saveAll(Arrays.asList(produto1, produto2));
 
-		Faq faq1 = new Faq(null, data.parse("27/10/2020 19:51"), "Muito bom!", p2);
-		Faq faq2 = new Faq(null, data.parse("10/12/2019 16:30"), "Produto de Excelente qualidade", p1);
+		Faq faq1 = new Faq(null, data.parse("27/10/2020 19:51"), "Muito bom!", produto2);
+		Faq faq2 = new Faq(null, data.parse("10/12/2019 16:30"), "Produto de Excelente qualidade", produto1);
 
 		repositorioFaq.saveAll(Arrays.asList(faq1, faq2));
 
-		Venda venda1 = new Venda(null, data.parse("25/06/2019 19:25"), 500.00, cliente1, formaPg1);
-		Venda venda2 = new Venda(null, data.parse("25/06/2019 19:25"), 800.00, cliente2, formaPg2);
+		Venda venda1 = new Venda(null, data.parse("25/06/2019 19:25"), 1421.00, cliente1, formaPg1);
+		Venda venda2 = new Venda(null, data.parse("25/06/2019 19:25"), 21.00, cliente2, formaPg2);
 
 		repositorioVenda.saveAll(Arrays.asList(venda1, venda2));
+
+		ItensVenda itens1 = new ItensVenda(null, 2, 2 * produto1.getPreco(), produto1, venda1);
+		ItensVenda itens2 = new ItensVenda(null, 1, produto2.getPreco(), produto2, venda2);
+
+		repositorioItensvenda.saveAll(Arrays.asList(itens1, itens2));
 	}
 
 }

@@ -94,10 +94,10 @@ public class FaqService {
 	 */
 	private void atualizarData(Faq novoObj, Faq obj) {
 
-		if (obj.getDataHora() == null) {
-			novoObj.setDataHora(novoObj.getDataHora());
+		if (obj.getData_hora() == null) {
+			novoObj.setData_hora(novoObj.getData_hora());
 		} else {
-			novoObj.setDataHora(obj.getDataHora());
+			novoObj.setData_hora(obj.getData_hora());
 		}
 		if (obj.getTexto() == null) {
 			novoObj.setTexto(novoObj.getTexto());

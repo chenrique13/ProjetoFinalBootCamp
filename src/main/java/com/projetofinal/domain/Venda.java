@@ -36,11 +36,11 @@ public class Venda implements Serializable {
 	private Double valorTotal;
 
 	@ManyToOne
-	@JoinColumn(name = "cliente_id")
+	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
 
 	@ManyToOne
-	@JoinColumn(name = "formapagamento_id")
+	@JoinColumn(name = "id_forma_pagamento")
 	private FormaPagamento formaPagamento;
 
 	@JsonIgnore

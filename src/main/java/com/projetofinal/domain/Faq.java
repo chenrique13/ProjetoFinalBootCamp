@@ -24,23 +24,23 @@ public class Faq implements Serializable {
 	private Integer id;
 
 	@Column
-	private Date dataHora;
+	private Date data_hora;
 
 	@Column
 	private String texto;
 
 	@ManyToOne
-	@JoinColumn(name = "produto_id")
+	@JoinColumn(name = "id_produto")
 	private Produto produto;
 
 	public Faq() {
 		super();
 	}
 
-	public Faq(Integer id, Date dataHora, String texto, Produto produto) {
+	public Faq(Integer id, Date data_hora, String texto, Produto produto) {
 		super();
 		this.id = id;
-		this.dataHora = dataHora;
+		this.data_hora = data_hora;
 		this.texto = texto;
 		this.produto = produto;
 	}
@@ -59,12 +59,12 @@ public class Faq implements Serializable {
 		this.id = id;
 	}
 
-	public Date getDataHora() {
-		return dataHora;
+	public Date getData_hora() {
+		return data_hora;
 	}
 
-	public void setDataHora(Date dataHora) {
-		this.dataHora = dataHora;
+	public void setData_hora(Date data_hora) {
+		this.data_hora = data_hora;
 	}
 
 	public String getTexto() {
