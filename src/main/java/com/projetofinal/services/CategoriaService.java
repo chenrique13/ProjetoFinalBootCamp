@@ -55,6 +55,19 @@ public class CategoriaService {
 	}
 
 	/**
+	 * Metodo para atualizar no repositorio, conferindo se o id do objeto existe
+	 * 
+	 * @author Carlos Pereira
+	 * @param obj
+	 * @return
+	 */
+	public Categoria atualizar(Categoria obj) {
+		Categoria novoObj = buscar(obj.getId());
+		atualizarData(novoObj, obj);
+		return repositorio.save(novoObj);
+	}
+
+	/**
 	 * Metodo para deletar do repositorio por id e se nao tiver retornar mensagem de
 	 * erro
 	 * 
@@ -70,4 +83,26 @@ public class CategoriaService {
 		}
 	}
 
+	/**
+	 * Metodo para mater valores anteriores quando os atributos nao forem
+	 * preenchidos na atualizacao
+	 * 
+	 * @author Carlos Pereira
+	 * @param novoObj
+	 * @param obj
+	 */
+	private void atualizarData(Categoria novoObj, Categoria obj) {
+
+		if (obj.getNome() == null) {
+			novoObj.setNome(novoObj.getNome());
+		} else {
+			novoObj.setNome(obj.getNome());
+		}
+
+		if (obj.isAtivo() == true) {
+			novoObj.setAtivo(true);
+		} else {
+			novoObj.setAtivo(false);
+		}
+	}
 }
