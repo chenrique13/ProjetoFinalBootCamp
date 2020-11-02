@@ -55,6 +55,19 @@ public class ClienteService {
 	}
 
 	/**
+	 * Metodo para atualizar no repositorio, conferindo se o id do objeto existe
+	 * 
+	 * @author Carlos Pereira
+	 * @param obj
+	 * @return
+	 */
+	public Cliente atualizar(Cliente obj) {
+		Cliente novoObj = buscar(obj.getId());
+		atualizarData(novoObj, obj);
+		return repositorio.save(novoObj);
+	}
+
+	/**
 	 * Metodo para deletar do repositorio por id e se nao tiver retornar mensagem de
 	 * erro
 	 * 
@@ -67,6 +80,60 @@ public class ClienteService {
 
 		} catch (EmptyResultDataAccessException e) {
 			throw new ObjectNotFoundException("Cliente não encontrada na base de dados para ser deletado.");
+		}
+	}
+
+	/**
+	 * Metodo para mater valores anteriores quando os atributos nao forem
+	 * preenchidos na atualizacao
+	 * 
+	 * @author Carlos Pereira
+	 * @param novoObj
+	 * @param obj
+	 */
+	private void atualizarData(Cliente novoObj, Cliente obj) {
+
+		if (obj.getNome() == null) {
+			novoObj.setNome(novoObj.getNome());
+		} else {
+			novoObj.setNome(obj.getNome());
+		}
+
+		if (obj.getCpf() == null) {
+			novoObj.setCpf(novoObj.getCpf());
+		} else {
+			novoObj.setCpf(obj.getCpf());
+		}
+
+		if (obj.getEmail() == null) {
+			novoObj.setEmail(novoObj.getEmail());
+		} else {
+			novoObj.setEmail(obj.getEmail());
+		}
+		if (obj.getDataNascimento() == null) {
+			novoObj.setDataNascimento(novoObj.getDataNascimento());
+		} else {
+			novoObj.setDataNascimento(obj.getDataNascimento());
+		}
+		if (obj.getSexo() == null) {
+			novoObj.setSexo(novoObj.getSexo());
+		} else {
+			novoObj.setSexo(obj.getSexo());
+		}
+		if (obj.getNomeSocial() == null) {
+			novoObj.setNomeSocial(novoObj.getNomeSocial());
+		} else {
+			novoObj.setNomeSocial(obj.getNomeSocial());
+		}
+		if (obj.getApelido() == null) {
+			novoObj.setApelido(novoObj.getApelido());
+		} else {
+			novoObj.setApelido(obj.getApelido());
+		}
+		if (obj.getTelefone() == null) {
+			novoObj.setTelefone(novoObj.getTelefone());
+		} else {
+			novoObj.setTelefone(obj.getTelefone());
 		}
 	}
 }

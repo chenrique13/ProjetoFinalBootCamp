@@ -22,7 +22,7 @@ public class ProdutoResource {
 
 	@Autowired
 	private ProdutoService servico;
-	
+
 	/**
 	 * Metodo buscar todos
 	 * 
@@ -30,7 +30,7 @@ public class ProdutoResource {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Produto>> findall() {
+	public ResponseEntity<List<Produto>> buscarTodos() {
 		List<Produto> lista = servico.buscarTodos();
 		return ResponseEntity.ok().body(lista);
 	}
@@ -42,13 +42,13 @@ public class ProdutoResource {
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Produto> buscar(@PathVariable Integer id) {
 
 		Produto objeto = servico.buscar(id);
 
 		return ResponseEntity.ok().body(objeto);
 	}
-	
+
 	/**
 	 * Metodo criar
 	 * 
@@ -56,13 +56,27 @@ public class ProdutoResource {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity <Produto> inserir (@RequestBody Produto obj){
+	public ResponseEntity<Produto> inserir(@RequestBody Produto obj) {
 		obj = servico.inserir(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 
 		return ResponseEntity.created(uri).body(obj);
 	}
-	
+
+	/**
+	 * Metodo atualizar por id
+	 * 
+	 * @author Carlos Pereira
+	 * @return
+	 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Produto> atualizar(@RequestBody Produto obj, @PathVariable Integer id) {
+		obj.setId(id);
+		obj = servico.atualizar(obj);
+
+		return ResponseEntity.ok().body(obj);
+	}
+
 	/**
 	 * Metodo deletar por id
 	 * 
@@ -70,7 +84,7 @@ public class ProdutoResource {
 	 * @return
 	 */
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+	public ResponseEntity<Void> deletar(@PathVariable Integer id) {
 		servico.delete(id);
 		return ResponseEntity.noContent().build();
 	}

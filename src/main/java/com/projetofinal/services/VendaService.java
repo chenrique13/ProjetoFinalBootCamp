@@ -55,6 +55,19 @@ public class VendaService {
 	}
 
 	/**
+	 * Metodo para atualizar no repositorio, conferindo se o id do objeto existe
+	 * 
+	 * @author Carlos Pereira
+	 * @param obj
+	 * @return
+	 */
+	public Venda atualizar(Venda obj) {
+		Venda novoObj = buscar(obj.getId());
+		atualizarData(novoObj, obj);
+		return repositorio.save(novoObj);
+	}
+
+	/**
 	 * Metodo para deletar do repositorio por id e se nao tiver retornar mensagem de
 	 * erro
 	 * 
@@ -70,4 +83,25 @@ public class VendaService {
 		}
 	}
 
+	/**
+	 * Metodo para mater valores anteriores quando os atributos nao forem
+	 * preenchidos na atualizacao
+	 * 
+	 * @author Carlos Pereira
+	 * @param novoObj
+	 * @param obj
+	 */
+	private void atualizarData(Venda novoObj, Venda obj) {
+
+		if (obj.getDataHora() == null) {
+			novoObj.setDataHora(novoObj.getDataHora());
+		} else {
+			novoObj.setDataHora(obj.getDataHora());
+		}
+		if (obj.getValorTotal() == null) {
+			novoObj.setValorTotal(novoObj.getValorTotal());
+		} else {
+			novoObj.setValorTotal(obj.getValorTotal());
+		}
+	}
 }

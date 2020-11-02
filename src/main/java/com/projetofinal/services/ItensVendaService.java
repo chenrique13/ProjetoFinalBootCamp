@@ -55,6 +55,19 @@ public class ItensVendaService {
 	}
 
 	/**
+	 * Metodo para atualizar no repositorio, conferindo se o id do objeto existe
+	 * 
+	 * @author Carlos Pereira
+	 * @param obj
+	 * @return
+	 */
+	public ItensVenda atualizar(ItensVenda obj) {
+		ItensVenda novoObj = buscar(obj.getId());
+		atualizarData(novoObj, obj);
+		return repositorio.save(novoObj);
+	}
+
+	/**
 	 * Metodo para deletar do repositorio por id e se nao tiver retornar mensagem de
 	 * erro
 	 * 
@@ -67,6 +80,28 @@ public class ItensVendaService {
 
 		} catch (EmptyResultDataAccessException e) {
 			throw new ObjectNotFoundException("Cliente não encontrada na base de dados para ser deletado.");
+		}
+	}
+
+	/**
+	 * Metodo para mater valores anteriores quando os atributos nao forem
+	 * preenchidos na atualizacao
+	 * 
+	 * @author Carlos Pereira
+	 * @param novoObj
+	 * @param obj
+	 */
+	private void atualizarData(ItensVenda novoObj, ItensVenda obj) {
+
+		if (obj.getQuantidade() == null) {
+			novoObj.setQuantidade(novoObj.getQuantidade());
+		} else {
+			novoObj.setQuantidade(obj.getQuantidade());
+		}
+		if (obj.getValorUnitario() == null) {
+			novoObj.setValorUnitario(novoObj.getValorUnitario());
+		} else {
+			novoObj.setValorUnitario(obj.getValorUnitario());
 		}
 	}
 

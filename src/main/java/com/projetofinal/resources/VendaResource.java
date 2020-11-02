@@ -30,7 +30,7 @@ public class VendaResource {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Venda>> findall() {
+	public ResponseEntity<List<Venda>> buscarTodos() {
 		List<Venda> lista = servico.buscarTodos();
 		return ResponseEntity.ok().body(lista);
 	}
@@ -42,7 +42,7 @@ public class VendaResource {
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Venda> buscar(@PathVariable Integer id) {
 
 		Venda objeto = servico.buscar(id);
 
@@ -64,13 +64,27 @@ public class VendaResource {
 	}
 
 	/**
+	 * Metodo atualizar por id
+	 * 
+	 * @author Carlos Pereira
+	 * @return
+	 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Venda> atualizar(@RequestBody Venda obj, @PathVariable Integer id) {
+		obj.setId(id);
+		obj = servico.atualizar(obj);
+
+		return ResponseEntity.ok().body(obj);
+	}
+	
+	/**
 	 * Metodo deletar por id
 	 * 
 	 * @author Cícero Junior
 	 * @return
 	 */
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+	public ResponseEntity<Void> deletar(@PathVariable Integer id) {
 		servico.delete(id);
 		return ResponseEntity.noContent().build();
 	}

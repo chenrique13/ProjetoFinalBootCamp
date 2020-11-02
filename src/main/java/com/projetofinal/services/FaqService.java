@@ -55,6 +55,19 @@ public class FaqService {
 	}
 
 	/**
+	 * Metodo para atualizar no repositorio, conferindo se o id do objeto existe
+	 * 
+	 * @author Carlos Pereira
+	 * @param obj
+	 * @return
+	 */
+	public Faq atualizar(Faq obj) {
+		Faq novoObj = buscar(obj.getId());
+		atualizarData(novoObj, obj);
+		return repositorio.save(novoObj);
+	}
+
+	/**
 	 * Metodo para deletar do repositorio por id e se nao tiver retornar mensagem de
 	 * erro
 	 * 
@@ -70,4 +83,28 @@ public class FaqService {
 		}
 
 	}
+
+	/**
+	 * Metodo para mater valores anteriores quando os atributos nao forem
+	 * preenchidos na atualizacao
+	 * 
+	 * @author Carlos Pereira
+	 * @param novoObj
+	 * @param obj
+	 */
+	private void atualizarData(Faq novoObj, Faq obj) {
+
+		if (obj.getDataHora() == null) {
+			novoObj.setDataHora(novoObj.getDataHora());
+		} else {
+			novoObj.setDataHora(obj.getDataHora());
+		}
+		if (obj.getTexto() == null) {
+			novoObj.setTexto(novoObj.getTexto());
+		} else {
+			novoObj.setTexto(obj.getTexto());
+		}
+
+	}
+
 }

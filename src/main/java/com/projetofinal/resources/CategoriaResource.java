@@ -30,7 +30,7 @@ public class CategoriaResource {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Categoria>> findall() {
+	public ResponseEntity<List<Categoria>> buscarTodos() {
 		List<Categoria> lista = servico.buscarTodos();
 		return ResponseEntity.ok().body(lista);
 	}
@@ -42,7 +42,7 @@ public class CategoriaResource {
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Categoria> buscar(@PathVariable Integer id) {
 
 		Categoria objeto = servico.buscar(id);
 
@@ -84,7 +84,7 @@ public class CategoriaResource {
 	 * @return
 	 */
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+	public ResponseEntity<Void> deletar(@PathVariable Integer id) {
 		servico.delete(id);
 		return ResponseEntity.noContent().build();
 	}

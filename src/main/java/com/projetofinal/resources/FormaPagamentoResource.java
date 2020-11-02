@@ -30,7 +30,7 @@ public class FormaPagamentoResource {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<FormaPagamento>> findall() {
+	public ResponseEntity<List<FormaPagamento>> buscarTodos() {
 		List<FormaPagamento> lista = servico.buscarTodos();
 		return ResponseEntity.ok().body(lista);
 	}
@@ -42,7 +42,7 @@ public class FormaPagamentoResource {
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<FormaPagamento> buscar(@PathVariable Integer id) {
 
 		FormaPagamento objeto = servico.buscar(id);
 
@@ -64,13 +64,27 @@ public class FormaPagamentoResource {
 	}
 
 	/**
+	 * Metodo atualizar por id
+	 * 
+	 * @author Carlos Pereira
+	 * @return
+	 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<FormaPagamento> atualizar(@RequestBody FormaPagamento obj, @PathVariable Integer id) {
+		obj.setId(id);
+		obj = servico.atualizar(obj);
+
+		return ResponseEntity.ok().body(obj);
+	}
+
+	/**
 	 * Metodo deletar por id
 	 * 
 	 * @author Cícero Junior
 	 * @return
 	 */
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+	public ResponseEntity<Void> deletar(@PathVariable Integer id) {
 		servico.delete(id);
 		return ResponseEntity.noContent().build();
 	}

@@ -55,6 +55,19 @@ public class MarcaService {
 	}
 
 	/**
+	 * Metodo para atualizar no repositorio, conferindo se o id do objeto existe
+	 * 
+	 * @author Carlos Pereira
+	 * @param obj
+	 * @return
+	 */
+	public Marca atualizar(Marca obj) {
+		Marca novoObj = buscar(obj.getId());
+		atualizarData(novoObj, obj);
+		return repositorio.save(novoObj);
+	}
+
+	/**
 	 * Metodo para deletar do repositorio por id e se nao tiver retornar mensagem de
 	 * erro
 	 * 
@@ -70,4 +83,30 @@ public class MarcaService {
 		}
 	}
 
+	/**
+	 * Metodo para mater valores anteriores quando os atributos nao forem
+	 * preenchidos na atualizacao
+	 * 
+	 * @author Carlos Pereira
+	 * @param novoObj
+	 * @param obj
+	 */
+	private void atualizarData(Marca novoObj, Marca obj) {
+
+		if (obj.getNome() == null) {
+			novoObj.setNome(novoObj.getNome());
+		} else {
+			novoObj.setNome(obj.getNome());
+		}
+		if (obj.getDescricao() == null) {
+			novoObj.setDescricao(novoObj.getDescricao());
+		} else {
+			novoObj.setDescricao(obj.getDescricao());
+		}
+	}
+	/*
+	 * 
+	 * if (obj.get == null) { novoObj.set(novoObj.get); } else {
+	 * novoObj.set(obj.get); }
+	 */
 }

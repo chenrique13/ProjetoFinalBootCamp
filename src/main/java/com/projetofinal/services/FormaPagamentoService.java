@@ -55,6 +55,19 @@ public class FormaPagamentoService {
 	}
 
 	/**
+	 * Metodo para atualizar no repositorio, conferindo se o id do objeto existe
+	 * 
+	 * @author Carlos Pereira
+	 * @param obj
+	 * @return
+	 */
+	public FormaPagamento atualizar(FormaPagamento obj) {
+		FormaPagamento novoObj = buscar(obj.getId());
+		atualizarData(novoObj, obj);
+		return repositorio.save(novoObj);
+	}
+
+	/**
 	 * Metodo para deletar do repositorio por id e se nao tiver retornar mensagem de
 	 * erro
 	 * 
@@ -70,4 +83,30 @@ public class FormaPagamentoService {
 		}
 	}
 
+	/**
+	 * Metodo para mater valores anteriores quando os atributos nao forem
+	 * preenchidos na atualizacao
+	 * 
+	 * @author Carlos Pereira
+	 * @param novoObj
+	 * @param obj
+	 */
+	private void atualizarData(FormaPagamento novoObj, FormaPagamento obj) {
+
+		if (obj.getForma() == null) {
+			novoObj.setForma(novoObj.getForma());
+		} else {
+			novoObj.setForma(obj.getForma());
+		}
+		if (obj.getDescricao() == null) {
+			novoObj.setDescricao(novoObj.getDescricao());
+		} else {
+			novoObj.setDescricao(obj.getDescricao());
+		}
+		if (obj.isAtivo() == true) {
+			novoObj.setAtivo(true);
+		} else {
+			novoObj.setAtivo(false);
+		}
+	}
 }

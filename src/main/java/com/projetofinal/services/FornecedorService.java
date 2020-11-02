@@ -55,6 +55,19 @@ public class FornecedorService {
 	}
 
 	/**
+	 * Metodo para atualizar no repositorio, conferindo se o id do objeto existe
+	 * 
+	 * @author Carlos Pereira
+	 * @param obj
+	 * @return
+	 */
+	public Fornecedor atualizar(Fornecedor obj) {
+		Fornecedor novoObj = buscar(obj.getId());
+		atualizarData(novoObj, obj);
+		return repositorio.save(novoObj);
+	}
+
+	/**
 	 * Metodo para deletar do repositorio por id e se nao tiver retornar mensagem de
 	 * erro
 	 * 
@@ -70,4 +83,41 @@ public class FornecedorService {
 		}
 	}
 
+	/**
+	 * Metodo para mater valores anteriores quando os atributos nao forem
+	 * preenchidos na atualizacao
+	 * 
+	 * @author Carlos Pereira
+	 * @param novoObj
+	 * @param obj
+	 */
+	private void atualizarData(Fornecedor novoObj, Fornecedor obj) {
+
+		if (obj.getNome() == null) {
+			novoObj.setNome(novoObj.getNome());
+		} else {
+			novoObj.setNome(obj.getNome());
+		}
+		if (obj.getEndereco() == null) {
+			novoObj.setEndereco(novoObj.getEndereco());
+		} else {
+			novoObj.setEndereco(obj.getEndereco());
+		}
+		if (obj.getTelefone() == null) {
+			novoObj.setTelefone(novoObj.getTelefone());
+		} else {
+			novoObj.setTelefone(obj.getTelefone());
+		}
+		if (obj.getCnpj() == null) {
+			novoObj.setCnpj(novoObj.getCnpj());
+		} else {
+			novoObj.setCnpj(obj.getCnpj());
+		}
+		if (obj.getEmail() == null) {
+			novoObj.setEmail(novoObj.getEmail());
+		} else {
+			novoObj.setEmail(obj.getEmail());
+		}
+
+	}
 }
