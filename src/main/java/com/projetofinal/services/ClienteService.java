@@ -24,7 +24,7 @@ public class ClienteService {
 	 * @return
 	 */
 	public List<Cliente> buscarTodos() {
-		return repositorio.findAll();
+		return repositorio.findAllByOrderByIdAsc();
 	}
 
 	/**

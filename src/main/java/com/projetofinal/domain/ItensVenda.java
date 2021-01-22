@@ -31,7 +31,7 @@ public class ItensVenda implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_produto")
 	private Produto produto;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "id_venda")
 	private Venda venda;
@@ -40,11 +40,11 @@ public class ItensVenda implements Serializable {
 		super();
 	}
 
-	public ItensVenda(Integer id, Integer quantidade, Double valorUnitario, Produto produto, Venda venda) {
+	public ItensVenda(Integer id, Integer quantidade, Produto produto, Venda venda) {
 		super();
 		this.id = id;
 		this.quantidade = quantidade;
-		this.valorUnitario = valorUnitario;
+		this.valorUnitario = quantidade * produto.getPreco();
 		this.produto = produto;
 		this.venda = venda;
 	}

@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -21,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Cliente implements Serializable {
 
 	private static final long serialVersionUID = 3021764042514935974L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
@@ -37,6 +38,7 @@ public class Cliente implements Serializable {
 	private String email;
 
 	@Column
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date dataNascimento;
 
 	@Column(length = 20)
@@ -108,6 +110,7 @@ public class Cliente implements Serializable {
 	}
 
 	public Date getDataNascimento() {
+		
 		return dataNascimento;
 	}
 

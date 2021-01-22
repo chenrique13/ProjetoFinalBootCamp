@@ -24,7 +24,7 @@ public class ProdutoService {
 	 * @return
 	 */
 	public List<Produto> buscarTodos() {
-		return repositorio.findAll();
+		return repositorio.findAllByOrderByIdAsc();
 	}
 
 	/**
@@ -112,6 +112,21 @@ public class ProdutoService {
 			novoObj.setUnidade(novoObj.getUnidade());
 		} else {
 			novoObj.setUnidade(obj.getUnidade());
+		}
+		if (obj.getCategoria() == null) {
+			novoObj.setCategoria(novoObj.getCategoria());
+		} else {
+			novoObj.setCategoria(obj.getCategoria());
+		}
+		if (obj.getMarca() == null) {
+			novoObj.setMarca(novoObj.getMarca());
+		} else {
+			novoObj.setMarca(obj.getMarca());
+		}
+		if (obj.getFornecedor() == null) {
+			novoObj.setFornecedor(novoObj.getFornecedor());
+		} else {
+			novoObj.setFornecedor(obj.getFornecedor());
 		}
 	}
 

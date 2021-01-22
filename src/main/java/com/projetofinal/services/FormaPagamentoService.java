@@ -24,7 +24,7 @@ public class FormaPagamentoService {
 	 * @return
 	 */
 	public List<FormaPagamento> buscarTodos() {
-		return repositorio.findAll();
+		return repositorio.findAllByOrderByIdAsc();
 	}
 
 	/**

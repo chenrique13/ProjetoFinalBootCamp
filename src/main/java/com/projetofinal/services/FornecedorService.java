@@ -24,7 +24,7 @@ public class FornecedorService {
 	 * @return
 	 */
 	public List<Fornecedor> buscarTodos() {
-		return repositorio.findAll();
+		return repositorio.findAllByOrderByIdAsc();
 	}
 
 	/**

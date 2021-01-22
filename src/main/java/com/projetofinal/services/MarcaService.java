@@ -24,7 +24,7 @@ public class MarcaService {
 	 * @return
 	 */
 	public List<Marca> buscarTodos() {
-		return repositorio.findAll();
+		return repositorio.findAllByOrderByIdAsc();
 	}
 
 	/**

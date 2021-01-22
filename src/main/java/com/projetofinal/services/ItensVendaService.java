@@ -24,7 +24,7 @@ public class ItensVendaService {
 	 * @return
 	 */
 	public List<ItensVenda> buscarTodos() {
-		return repositorio.findAll();
+		return repositorio.findAllByOrderByIdAsc();
 	}
 
 	/**

@@ -64,7 +64,7 @@ public class Faq implements Serializable {
 	}
 
 	public void setData_hora(Date data_hora) {
-		this.data_hora = data_hora;
+		this.data_hora = new Date(System.currentTimeMillis());
 	}
 
 	public String getTexto() {

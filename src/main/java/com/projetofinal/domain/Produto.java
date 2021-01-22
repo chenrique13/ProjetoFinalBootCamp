@@ -33,6 +33,9 @@ public class Produto implements Serializable {
 
 	@Column
 	private String descricao;
+	
+	@Column
+	private String imgUrl;
 
 	@Column(name = "preco_unitario")
 	private Double preco;
@@ -55,7 +58,7 @@ public class Produto implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
 	private List<Faq> faq = new ArrayList<>();
-
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
 	private List<ItensVenda> itensVenda = new ArrayList<>();
@@ -63,19 +66,21 @@ public class Produto implements Serializable {
 	public Produto() {
 
 	}
-
-	public Produto(Integer id, String nome, String descricao, Double preco, Integer unidade, Categoria categoria,
-			Marca marca, Fornecedor fornecedor) {
-		super();
+	
+	public Produto(Integer id, String nome, String descricao, String imgUrl, Double preco, Integer unidade,
+			Categoria categoria, Marca marca, Fornecedor fornecedor) {
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
+		this.imgUrl = imgUrl;
 		this.preco = preco;
 		this.unidade = unidade;
 		this.categoria = categoria;
 		this.marca = marca;
 		this.fornecedor = fornecedor;
 	}
+
+
 
 	/**
 	 * Gets e Sets
@@ -105,6 +110,14 @@ public class Produto implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 
 	public Double getPreco() {

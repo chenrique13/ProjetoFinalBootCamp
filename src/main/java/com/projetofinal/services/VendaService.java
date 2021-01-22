@@ -24,7 +24,7 @@ public class VendaService {
 	 * @return
 	 */
 	public List<Venda> buscarTodos() {
-		return repositorio.findAll();
+		return repositorio.findAllByOrderByIdAsc();
 	}
 
 	/**
@@ -92,16 +92,10 @@ public class VendaService {
 	 * @param obj
 	 */
 	private void atualizarData(Venda novoObj, Venda obj) {
-
 		if (obj.getDataHora() == null) {
 			novoObj.setDataHora(novoObj.getDataHora());
 		} else {
 			novoObj.setDataHora(obj.getDataHora());
-		}
-		if (obj.getValorTotal() == null) {
-			novoObj.setValorTotal(novoObj.getValorTotal());
-		} else {
-			novoObj.setValorTotal(obj.getValorTotal());
 		}
 	}
 }

@@ -24,7 +24,7 @@ public class CategoriaService {
 	 * @return
 	 */
 	public List<Categoria> buscarTodos() {
-		return repositorio.findAll();
+		return repositorio.findAllByOrderByIdAsc();
 	}
 
 	/**

@@ -74,7 +74,7 @@ public class ProjetoFinalApplication implements CommandLineRunner {
 		Cliente cliente1 = new Cliente(null, "Carlos", "10193232444", "c.henrique13@gmail.com",
 				data.parse("13/09/1994 10:15"), "Masculino", null, "Carlinhos", "985740926");
 		Cliente cliente2 = new Cliente(null, "Cicero", "12325618910", "cirerooliveira@gmail.com",
-				data.parse("05/07/1989 07:00"), "Masculino", null, "Ciço", "912345678");
+				data.parse("05/07/1989 07:00"), "Masculino", "Cicinho", "Ciço", "912345678");
 
 		repositorioCliente.saveAll(Arrays.asList(cliente1, cliente2));
 
@@ -83,20 +83,20 @@ public class ProjetoFinalApplication implements CommandLineRunner {
 
 		repositorioFormaPagamento.saveAll(Arrays.asList(formaPg1, formaPg2));
 
-		Categoria categoria1 = new Categoria(null, "Livro", true);
+		Categoria categoria1 = new Categoria(null, "Audio", true);
 		Categoria categoria2 = new Categoria(null, "Informática", true);
 
-		Marca marca1 = new Marca(null, "Cia do Livro", "Editora");
+		Marca marca1 = new Marca(null, "Multilaser", "Headset");
 		Marca marca2 = new Marca(null, "Positivo", "Tecnologia");
 
 		Fornecedor fornecedor1 = new Fornecedor(null, "TI Brasil", "Rua 4, 12", "81 99985-5210", "12.345.789/0001-00",
 				"vendas@tibrasil.com");
 
-		Fornecedor fornecedor2 = new Fornecedor(null, "Edit Mais", "Rua Fg, 812", "88 87465-65201",
-				"987.654.271/0001-09", "vendas@editmais.com");
+		Fornecedor fornecedor2 = new Fornecedor(null, "Multilaser", "Rua Fg, 812", "88 87465-65201",
+				"987.654.271/0001-09", "vendas@multilaser.com");
 
-		Produto produto1 = new Produto(null, "Computador", "HP-123", 1421.00, 1, categoria2, marca2, fornecedor1);
-		Produto produto2 = new Produto(null, "Livro Didático", "ABACO", 21.00, 2, categoria1, marca1, fornecedor2);
+		Produto produto1 = new Produto(null, "Computador", "HP-123","https://cdn.pixabay.com/photo/2014/05/02/21/50/home-office-336377_1280.jpg", 1421.00, 1, categoria2, marca2, fornecedor1);
+		Produto produto2 = new Produto(null, "Headset", "Px-05", "https://cdn.pixabay.com/photo/2019/10/25/06/15/headphone-4576092_1280.jpg", 150.00, 2, categoria1, marca1, fornecedor2);
 
 		repositorioCategoria.saveAll(Arrays.asList(categoria1, categoria2));
 		repositorioMarca.saveAll(Arrays.asList(marca1, marca2));
@@ -108,15 +108,19 @@ public class ProjetoFinalApplication implements CommandLineRunner {
 
 		repositorioFaq.saveAll(Arrays.asList(faq1, faq2));
 
-		Venda venda1 = new Venda(null, data.parse("25/06/2019 19:25"), 1421.00, cliente1, formaPg1);
-		Venda venda2 = new Venda(null, data.parse("25/06/2019 19:25"), 21.00, cliente2, formaPg2);
+		Venda venda1 = new Venda(null, data.parse("25/06/2019 19:25"), 2 * produto1.getPreco(),cliente1, formaPg1);
+		Venda venda2 = new Venda(null, data.parse("25/06/2019 19:25"), produto2.getPreco(),cliente2, formaPg2);
+		Venda venda3 = new Venda(null, data.parse("25/06/2019 19:25"), 3 * produto2.getPreco(),cliente2, formaPg2);
+		Venda venda4 = new Venda(null, data.parse("25/06/2019 19:25"), produto1.getPreco(),cliente2, formaPg2);
 
-		repositorioVenda.saveAll(Arrays.asList(venda1, venda2));
+		repositorioVenda.saveAll(Arrays.asList(venda1, venda2, venda3, venda4));
 
-		ItensVenda itens1 = new ItensVenda(null, 2, 2 * produto1.getPreco(), produto1, venda1);
-		ItensVenda itens2 = new ItensVenda(null, 1, produto2.getPreco(), produto2, venda2);
+		ItensVenda itens1 = new ItensVenda(null, 2, produto1, venda1);
+		ItensVenda itens2 = new ItensVenda(null, 1, produto2, venda2);
+		ItensVenda itens3 = new ItensVenda(null, 3, produto2, venda3);
+		ItensVenda itens4 = new ItensVenda(null, 1, produto1, venda4);
 
-		repositorioItensvenda.saveAll(Arrays.asList(itens1, itens2));
+		repositorioItensvenda.saveAll(Arrays.asList(itens1, itens2, itens3, itens4));
 	}
 
 }

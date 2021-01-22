@@ -24,7 +24,7 @@ public class FaqService {
 	 * @return
 	 */
 	public List<Faq> buscarTodos() {
-		return repositorio.findAll();
+		return repositorio.findAllByOrderByIdAsc();
 	}
 
 	/**
@@ -103,6 +103,11 @@ public class FaqService {
 			novoObj.setTexto(novoObj.getTexto());
 		} else {
 			novoObj.setTexto(obj.getTexto());
+		}
+		if (obj.getProduto() == null) {
+			novoObj.setProduto(novoObj.getProduto());
+		} else {
+			novoObj.setProduto(obj.getProduto());
 		}
 
 	}
